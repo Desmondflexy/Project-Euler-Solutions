@@ -31,5 +31,6 @@ while count < 11:
         if k == len(a):
             s += n
             count += 1
+            print(n, count)
     n += 2
 print(s)
