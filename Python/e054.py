@@ -52,7 +52,7 @@ def n_of_a_kind(hd, n):
 
 def isconsecutive(hd):
     """Checks if card values are consecutive"""
-    f = lambda x: card_values.index(x[0])
+    def f(x): return card_values.index(x[0])
     i = card_values.index(min(hd, key=f)[0])
     j = card_values.index(max(hd, key=f)[0])
     return [k[0] for k in sorted(hd, key=f)] == card_values[i:j + 1]
