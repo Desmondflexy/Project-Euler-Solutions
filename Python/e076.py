@@ -13,7 +13,7 @@
 
 # print(part(100, 99))
 
-target = 5
+target = 100
 partitions = [1] + [0] * target
 for i in range(1, target + 1):
     for j in range(i, len(partitions)):

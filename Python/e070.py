@@ -2,7 +2,15 @@
 Problem 70 - Totient permuation
 """
 from sympy import totient
+# from myfunc import factor
 
+# def phi(n):
+#     'Counts numbers < n relatively prime to n'
+#     p = set(factor(n))
+#     y = n
+#     for i in p:
+#         y *= (1 - 1/i)
+#     return int(y)
 
 def num2array(num):
     """Converts the digits of num to array"""
@@ -26,3 +34,6 @@ for n in range(2, 10 ** 7):
             xmin = x0
             nmin = n
 print(nmin)
+
+
+"""Computed in 14mins..."""
