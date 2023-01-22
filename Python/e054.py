@@ -5,7 +5,7 @@ card_suits = ['C', 'S', 'D', 'H']  # -> club[C], spade[S], diamond[D], heart[H]
 card_values = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A']
 
 
-def rank(hd):
+def rank(hd: list[str]):
     """Returns the rank of a hand in the card game of poker."""
     # Royal flush -- 10
     for suit in card_suits:
@@ -52,7 +52,9 @@ def n_of_a_kind(hd, n):
 
 def isconsecutive(hd):
     """Checks if card values are consecutive"""
+
     def f(x): return card_values.index(x[0])
+
     i = card_values.index(min(hd, key=f)[0])
     j = card_values.index(max(hd, key=f)[0])
     return [k[0] for k in sorted(hd, key=f)] == card_values[i:j + 1]
@@ -76,6 +78,7 @@ for line in book:
         continue
 
     if rank(player1) == rank(player2):
+        # print(f"{player1} {rank(player1)} -- {rank(player2)} {player2}")
         p1 = handvalue(player1)
         p2 = handvalue(player2)
         # The only possibility of a draw is when: rank(player) <= 2.
@@ -99,7 +102,7 @@ for line in book:
                 continue
 
             if n1 == n2:
-                for t in range(2):
+                for _ in range(2):
                     p1.remove(n1)
                     p2.remove(n2)
                 a = sorted(p1, reverse=True)

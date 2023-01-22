@@ -86,3 +86,8 @@ export function primes(n) {
     }
     return p.filter(i => i > 0);
 }
+
+/**Count the number of occurence in an array */
+export function count(arr, elem){
+    return arr.filter(i => i === elem).length;
+}
