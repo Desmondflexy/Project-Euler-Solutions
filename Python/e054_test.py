@@ -95,7 +95,7 @@ for line in book:
         p1 = handvalue(player1)
         p2 = handvalue(player2)
         # The only possibility of a draw is when: rank(player) <= 2.
-        if r1 == 1:
+        if r1 < 2:
             # High Card: Highest value card
             if p1 > p2:
                 player1_wins += 1

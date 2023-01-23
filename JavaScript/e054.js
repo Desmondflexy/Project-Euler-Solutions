@@ -2,15 +2,16 @@
 const card_suits = ['C', 'S', 'D', 'H'];  // -> club[C], spade[S], diamond[D], heart[H]
 const card_values = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'];
 
+//SAMPLE INPUT
+player_1 = ['JD', 'TD', 'AD', 'KD', 'QD'];
+
 /**Returns the rank of a hand in the card game of poker.*/
 function rank(hand) {
     // Royal flush -- 10
-    for (let i = 0; i < card_suits.length; i++) {
-        const suit = card_suits[i];
-        const cards = [];
-        card_values.slice(8).forEach(val => cards.push(val + suit))
-        if (hand.every(card => cards.includes(card))) return 10;
-    }
+    const hand_values = hand.map(i => i[0]);
+    const big_card_values = card_values.slice(8);
+    if (big_card_values.every(i => hand_values.includes(i)) && is_same_suit()) return 10;
+
     // Straight flush -- 9
     if (isconsecutive() && is_same_suit()) return 9;
     // Four of a kind -- 8
@@ -25,13 +26,12 @@ function rank(hand) {
     if (n_of_a_kind(3) > 0) return 4;
     // Two pair
     if (n_of_a_kind(2) > 1) return 3;
-    if (n_of_a_kind(2) > 0) return 2;
-    return 1;
+    // One pair -- 2 otherwise High card -- 1
+    return n_of_a_kind(2) > 0 ? 2 : 1;
 
 
     /**Checks if card values are consecutive */
     function isconsecutive() {
-        // const a = hand.map(i => i[0]).sort().join('');
         const d = hand.map(i => card_values.indexOf(i[0]));
         d.sort((a, b) => a - b);
         const a = d.map(i => card_values[i]).join('');
@@ -53,28 +53,22 @@ function rank(hand) {
                 kind[val]++;
             }
         }
-        return Object.values(kind).filter(i => i === n).length;
+        return count(Object.values(kind), n);
     }
 
     /**Checks if cards are same suit. */
     function is_same_suit() {
-        for (let i = 0; i < card_suits.length; i++) {
-            const suit = card_suits[i];
-            const s = [];
-            hand.forEach(card => s.push(card[1]));
-            if (s.every(k => k === suit)) return true;
-        }
-        return false;
+        const hand_suits = hand.map(i => i[1]);
+        const unique_hand_suits = new Set(hand_suits);
+        return Array.from(unique_hand_suits).length === 1;
     }
 }
 
 
 /**Converts cards in hand to values in descending order. */
 function handvalue(hand) {
-    const val = [];
-    hand.forEach(card => val.push(card[0]));
-    const lst = [];
-    val.forEach(v => lst.push(card_values.indexOf(v) + 2));
+    const val = hand.map(card => card[0]);
+    const lst = val.map(v => card_values.indexOf(v) + 2);
     return lst.map(i => i).sort((x, y) => y - x);
 }
 
@@ -84,10 +78,8 @@ fetch('./p054_poker.json')
         const book = Object.values(obj);
         let player1_wins = 0;
         let results = 0;
-        let sn = 1;
         for (let i = 0; i < book.length; i++) {
-            const line = book[i];
-            const hand = line.split(' ');
+            const hand = book[i].split(' ');
             const player1 = hand.slice(0, 5);
             const player2 = hand.slice(5,);
             const r1 = rank(player1);
@@ -142,9 +134,8 @@ fetch('./p054_poker.json')
             const x = 1;
             if ((r1 >= x || r2 >= x) && winner.includes('player1')) {
                 results++;
-                console.log(`${sn} [${player1}] ${r1} -- ${r2} [${player2}] -- ${winner}`);
+                console.log(`[${player1}] ${r1} -- ${r2} [${player2}] -- ${winner}`);
             }
-            sn++;
         }
         console.log(results);
         document.body.innerHTML = `Euler Problem 54<br>Poker hands`;
@@ -152,7 +143,7 @@ fetch('./p054_poker.json')
     })
 
 
-/**Count the number of occurence of an element in an array */
+/**Returns the number of occurence of an element in an array */
 function count(arr, elem) {
     return arr.filter(i => i === elem).length;
 }
