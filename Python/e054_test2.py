@@ -26,6 +26,10 @@ def rank(hd: list[str]):
         j = card_values.index(max(hd, key=f)[0])
         return [k[0] for k in sorted(hd, key=f)] == card_values[i:j + 1]
 
+    def is_same_suit():
+        hand_suits = set([i[1] for i in hd])
+        return len(hand_suits) == 1
+
     # Royal flush -- 10
     for suit in card_suits:
         cards = [val + suit for val in card_values[8:]]
@@ -77,8 +81,6 @@ def handvalue(hd):
 
 book = open('p054_poker.txt')
 player1_wins = 0
-results = 0
-sn = 1
 for line in book:
     hand = line.strip().split(' ')
     player1 = hand[:5]
@@ -88,50 +90,30 @@ for line in book:
 
     if r1 > r2:
         player1_wins += 1
-        winner = 'player1 wins (rank)'
-    elif r1 < r2:
-        winner = 'player2 wins (rank)'
-    else:
+        continue
+    if r1 == r2:
         p1 = handvalue(player1)
         p2 = handvalue(player2)
-        # The only possibility of a draw is when: rank(player) <= 2.
         if r1 < 2:
-            # High Card: Highest value card
             if p1 > p2:
                 player1_wins += 1
-                winner = 'player1 wins (highest card)'
-            elif p1 < p2:
-                winner = 'player2 wins (highest card)'
-            else:  # Very rare for both players to have the same values
-                winner = 'draw'
-        else:  # r1 = r2 = 2
-            # One Pair: Two cards of the same value
+                continue
+        else:
             a = [p1.count(i) for i in p1]
-            n1 = p1[a.index(2)]
+            n1 = p1[a.index(max(a))]
             b = [p2.count(i) for i in p2]
-            n2 = p2[b.index(2)]
+            n2 = p2[b.index(max(b))]
 
             if n1 > n2:
                 player1_wins += 1
-                winner = 'player1 wins (one pair)'
-            elif n1 < n2:
-                winner = 'player2 wins (one pair)'
-            else:
-                for _ in range(2):
+                continue
+            if n1 == n2:
+                for _ in range(max(a)):
                     p1.remove(n1)
                     p2.remove(n2)
                 if p1 > p2:
                     player1_wins += 1
-                    winner = 'player1 wins (one pair, highest cards)'
-                elif p1 < p2:
-                    winner = 'player2 wins (one pair, highest cards)'
-                else:  # very rare
-                    winner = 'draw'
+                    continue
 
-    x = 1
-    if (r1 >= x or r2 >= x) and 'player1' in winner:
-        results += 1
-        print(f"{sn:4d} {player1} {r1} -- {r2} {player2} -- {winner}")
-    sn += 1
-print(results)
+print(player1_wins)
 book.close()
