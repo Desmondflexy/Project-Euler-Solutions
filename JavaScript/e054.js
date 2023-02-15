@@ -94,40 +94,28 @@ fetch('./p054_poker.json')
             } else {
                 const p1 = handvalue(player1);
                 const p2 = handvalue(player2);
+                const a = p1.map(i => count(p1, i));
+                const n1 = p1[a.indexOf(2)];
+                const b = p2.map(i => count(p2, i));
+                const n2 = p2[b.indexOf(2)];
 
-                if (r1 === 1) {
+                if (n1 > n2) {
+                    player1_wins++;
+                    winner = 'player1 wins (one pair)';
+                } else if (n1 < n2) {
+                    winner = 'player2 wins (one pair)';
+                } else {
+                    for (let i = 0; i < 2; i++) {
+                        p1.splice(p1.indexOf(n1), 1);
+                        p2.splice(p2.indexOf(n2), 1);
+                    }
                     if (arrayCompare(p1, p2) > 0) {
                         player1_wins++;
-                        winner = 'player1 wins (highest card)';
+                        winner = 'player1 wins (one pair, highest cards)';
                     } else if (arrayCompare(p1, p2) < 0) {
-                        winner = 'player2 wins (highest card)';
+                        winner = 'player2 wins (one pair, highest cards)';
                     } else {
                         winner = 'draw';
-                    }
-                } else {
-                    const a = p1.map(i => count(p1, i));
-                    const n1 = p1[a.indexOf(2)];
-                    const b = p2.map(i => count(p2, i));
-                    const n2 = p2[b.indexOf(2)];
-
-                    if (n1 > n2) {
-                        player1_wins++;
-                        winner = 'player1 wins (one pair)';
-                    } else if (n1 < n2) {
-                        winner = 'player2 wins (one pair)';
-                    } else {
-                        for (let i = 0; i < 2; i++) {
-                            p1.splice(p1.indexOf(n1), 1);
-                            p2.splice(p2.indexOf(n2), 1);
-                        }
-                        if (arrayCompare(p1, p2) > 0) {
-                            player1_wins++;
-                            winner = 'player1 wins (one pair, highest cards)';
-                        } else if (arrayCompare(p1, p2) < 0) {
-                            winner = 'player2 wins (one pair, highest cards)';
-                        } else {
-                            winner = 'draw';
-                        }
                     }
                 }
             }
