@@ -38,6 +38,5 @@ function CodelandUsernameValidation(str) {
     return true;
 }
 
-
 // keep this function call here 
 console.log(CodelandUsernameValidation('abcd_'));

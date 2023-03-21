@@ -1,12 +1,10 @@
 function BracketMatcher(str) {
     let open = 0;
-
-    for (let i = 0; i < str.length; i++) {
-        if (str[i] === '(') open++;
-        if (str[i] === ')') open--;
+    Array.from(str).forEach(char => {
+        if (char === '(') open++;
+        if (char === ')') open--;
         if (open < 0) return 0;
-    }
-
+    })
     return open ? 0 : 1;
 }
 
