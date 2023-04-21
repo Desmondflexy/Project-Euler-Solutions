@@ -2,7 +2,6 @@
 Problem 72 - Counting fractions
 """
 from time import time
-
 from sympy.ntheory import sieve
 
 tic = time()

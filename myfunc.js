@@ -87,7 +87,24 @@ export function primes(n) {
     return p.filter(i => i > 0);
 }
 
+
 /**Count the number of occurence in an array */
 export function count(arr, elem){
     return arr.filter(i => i === elem).length;
+}
+
+
+/**Converts text to proper case */
+export function properCase(text) {
+    const words = text.split(' ').map(word => {
+        const firstLetter = word.substring(0, 1).toUpperCase();
+        return firstLetter + word.substring(1);
+    })
+    return words.join(' ');
+}
+
+
+/**Gets the acronym of a text */
+export function acronym(text) {
+    return text.split(' ').map(word => word.substring(0, 1).toUpperCase()).join('');
 }

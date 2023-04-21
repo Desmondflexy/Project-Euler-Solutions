@@ -1,7 +1,3 @@
-from math import sqrt
-from time import time
-
-
 def lsqrt(N, num_of_digits):
     "Square root digit by digit long division method"
 
@@ -28,8 +24,8 @@ def lsqrt(N, num_of_digits):
             x = (m + i) * i
         remainder = n - x
         res = res*10 + i
- 
-    return sum(int(i) for i in str(res))
+
+    return res
 
 
 def split_twos(num: int) -> list:
@@ -42,11 +38,4 @@ def split_twos(num: int) -> list:
     return a
 
 
-tic = time()
-s = 0
-for n in range(1, 100):
-    if sqrt(n) != int(sqrt(n)):
-        s += lsqrt(n, 100)
-
-print(f'Answer: {s}')
-print(f'Time elapsed: {time() - tic :.4f} seconds')
+print(lsqrt(2, 100))
