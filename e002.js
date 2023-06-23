@@ -8,3 +8,7 @@ while (a < 4000000) {
     }
 }
 console.log(x);
+
+for (let i = 0; i < 20; i++){
+    console.log(i);
+}

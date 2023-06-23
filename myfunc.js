@@ -1,5 +1,5 @@
 /** Reverses the digits of a number */
-export function reverse(num) {
+function reverse(num) {
     let a = 0;
     while (num > 0) {
         a = a * 10 + num % 10;
@@ -10,7 +10,7 @@ export function reverse(num) {
 
 
 /** Returns true if a number is prime */
-export function isprime(n) {
+function isprime(n) {
 
     if (n === 2 || n === 3) return true;
     if (n < 2 || n % 2 === 0) return false;
@@ -28,7 +28,7 @@ export function isprime(n) {
 
 
 /** Calculates sum of all elements in an array */
-export function sum(array) {
+function sum(array) {
     let s = 0;
     for (let i of array) {
         s += i;
@@ -38,7 +38,7 @@ export function sum(array) {
 
 
 /** Calculates number of divisors of a number */
-export function ndivs(n) {
+function ndivs(n) {
     let k = 0;
     let z = Math.sqrt(n);
     for (let i = 1; i <= z; i++) {
@@ -50,7 +50,7 @@ export function ndivs(n) {
 
 
 /** Generates list of divisors of a number */
-export function divisors(n) {
+function divisors(n) {
     let A = [], B = [];
     let a = 0, b = 0;
     for (let i = 1; i <= Math.sqrt(n); i++) {
@@ -70,7 +70,7 @@ export function divisors(n) {
 
 
 /** Generates list of prime numbers */
-export function primes(n) {
+function primes(n) {
     let p = [];
     for (let i = 1; i <= n; i += 2) {
         p.push(i);
@@ -89,13 +89,13 @@ export function primes(n) {
 
 
 /**Count the number of occurence in an array */
-export function count(arr, elem){
+function count(arr, elem){
     return arr.filter(i => i === elem).length;
 }
 
 
 /**Converts text to proper case */
-export function properCase(text) {
+function properCase(text) {
     const words = text.split(' ').map(word => {
         const firstLetter = word.substring(0, 1).toUpperCase();
         return firstLetter + word.substring(1);
@@ -105,6 +105,29 @@ export function properCase(text) {
 
 
 /**Gets the acronym of a text */
-export function acronym(text) {
+function acronym(text) {
     return text.split(' ').map(word => word.substring(0, 1).toUpperCase()).join('');
+}
+
+
+function factorial(n){
+  let p = 1;
+  for (let i = n; i >= 1; i--){
+      p *= i;
+  }
+  return p;
+}
+
+module.exports = {
+  reverse,
+  isprime,
+  sum,
+  ndivs,
+  divisors,
+  primes,
+  count,
+  properCase,
+  acronym,
+  factorial,
+  author: 'Desmond'
 }

@@ -6,6 +6,7 @@ of their digits.
 Note: as 1! = 1 and 2! = 2 are not sums they are not included.
 """
 import math
+from time import time
 
 
 def sumfac(num):
@@ -13,9 +14,13 @@ def sumfac(num):
     return sum([math.factorial(x) for x in digits])
 
 
+start = time()
+
 s = 0
 for n in range(3, 10000000):
     if n == sumfac(n):
         print(n)
         s += n
 print(s)
+
+f'Runtime: {time() - start}.'

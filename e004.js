@@ -1,4 +1,5 @@
 // import {reverse} from "./myfunc.js";
+const {reverse} = require('./myfunc')
 
 let largest = 0;
 let c, pal;
@@ -14,14 +15,3 @@ for (let a = 900; a < 1000; a++) {
     }
 }
 console.log(largest);
-
-
-/** Reverses the digits of a number */
-function reverse(num) {
-    let a = 0;
-    while (num > 0) {
-        a = a * 10 + num % 10;
-        num = Math.floor(num / 10);
-    }
-    return a;
-}
