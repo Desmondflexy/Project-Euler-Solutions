@@ -11,4 +11,3 @@ for (let i = 4000; i <= 200000; i++) {
     }
 }
 console.log(sum);
-document.write('hello world');
