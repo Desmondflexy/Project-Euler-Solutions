@@ -1,2 +1,6 @@
 .idea/
 .vscode/
+project-euler-typescript/dist/
+project-euler-typescript/node_modules/
+project-euler-typescript/package-lock.json
+project-euler-typescript/tsconfig.json
